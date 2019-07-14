@@ -95,13 +95,19 @@ DEP_FILE       = $(BUILD_DIR)depends.mk
 
 ifeq ($(FAMILY),f4xx)
 
-MODEL_DEFINE = STM32F40_41xxx -DSTM32F4XX -DARM_MATH_CM4 -D__FPU_PRESENT
 STARTUP_OBJ   = $(BUILD_DIR)startup_stm32f4xx.o
-LINKER_SCRIPT = stmlib/linker_scripts/stm32f4xx_flash$(LD_SUFFIX).ld
-FW_STDDRIVER_DIR = $(STM32_PATH)/STM32F4xx_StdPeriph_Driver
 ARCHFLAGS = -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mthumb-interwork -funroll-loops
-ARCH_DEFINE = GCC_ARMCM4
 OPENOCD_TARGET = f4x
+ARCH_DEFINE = GCC_ARMCM4
+FW_STDDRIVER_DIR = $(STM32_PATH)/STM32F4xx_StdPeriph_Driver
+
+ifeq ($(CHIP),STM32F427VI)
+MODEL_DEFINE = STM32F427_437xx -DSTM32F4XX -DARM_MATH_CM4 -D__FPU_PRESENT
+LINKER_SCRIPT = stmlib/linker_scripts/stm32f427x_flash$(LD_SUFFIX).ld
+else
+MODEL_DEFINE = STM32F40_41xxx -DSTM32F4XX -DARM_MATH_CM4 -D__FPU_PRESENT
+LINKER_SCRIPT = stmlib/linker_scripts/stm32f4xx_flash$(LD_SUFFIX).ld
+endif
 
 else ifeq ($(FAMILY),f37x)
 

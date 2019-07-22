@@ -26,7 +26,8 @@
 # Files and directories
 # ------------------------------------------------------------------------------
 
-TOOLCHAIN_PATH ?= /usr/local/arm/
+#TOOLCHAIN_PATH ?= /usr/local/arm/
+TOOLCHAIN_PATH ?= /usr/
 
 PGM_INTERFACE ?= stlink-v2
 # PGM_INTERFACE ?= ftdi/olimex-arm-jtag-swd
